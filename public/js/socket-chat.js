@@ -2,9 +2,10 @@ var socket = io();
 
 var searchParams = new URLSearchParams(window.location.search);
 
-if (!searchParams.has('nombre') || !searchParams.has('sala')) {
+if (!searchParams.has('nombre') || !searchParams.has('sala') || searchParams.get('sala') != 'cgs-sala') {
     window.location = 'index.html';
-    throw new Error('El nombre y sala son necesarios');
+    //throw new Error('El nombre y sala son necesarios');
+
 }
 
 var usuario = {
