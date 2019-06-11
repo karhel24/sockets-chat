@@ -54,12 +54,14 @@ io.on('connection', (client) => {
     });
 
     // Recine el mensaje del cliente y lo emite a todos los usuarios conectados de la SALA
-    client.on('crearMensaje', (data) => {
+    client.on('crearMensaje', (data, callback) => {
 
         let persona = usuarios.getPersona(client.id);
         //console.log('crearMensaje rx', data);
         let mensaje = crearMensaje(persona.nombre, data.mensaje);
         client.broadcast.to(persona.sala).emit('crearMensaje', mensaje);
+
+        callback(mensaje);
     });
 
     //Mensajes privados
